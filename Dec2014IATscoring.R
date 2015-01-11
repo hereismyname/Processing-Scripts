@@ -1,4 +1,6 @@
 ## This should be the algorithm specified by Greenwald.
+## Still need to write code to save output.
+
 ## Gather block mean RTs
 
 means <- sub211 %>%
