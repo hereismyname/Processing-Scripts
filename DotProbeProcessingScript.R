@@ -10,10 +10,11 @@ getprobeRTs <- function(x, RTfile, readfile){
     readingtimes <- data.frame()
     transformeddata <- data.frame()
     
-    for (file in files) {
+    for (i in 1:length(files)) {
         
-        data <- tbl_df(read.csv(file))
+        path <- paste(x, files[i], sep = "/") # build file path
         
+        data <- tbl_df(read.csv(path))
         subjectreading <- data %>%
             select(subject,block, HIVparagraph, FLUparagraph, RTP1, RTP2)
         
