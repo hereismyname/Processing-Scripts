@@ -130,7 +130,7 @@ getprobeRTs <- function(x, RTfile, readfile){
             transformeddata <- rbind(transformeddata, subjectdata)
             
     } else {
-        text <- paste("No congruency column(s) in file ", data[1,1], "...")
+        text <- paste("No congruency column(s) in file ", data[1,3], "...") ## derp
         message(text)
         }
     }
