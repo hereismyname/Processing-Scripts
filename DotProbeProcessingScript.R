@@ -3,10 +3,15 @@ library(dplyr)
 x <- readline("State desired Directory (no quotation marks, please!): ")
 
 
-getprobeRTs <- function(directory, RTfile, readfile){
+getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
     ## initialize empty data frames, grab list of files
     
     files <- list.files(directory)
+    files <- files[!(files %in% exclude)] # grab filenames, minus excluded entries
+    
+    readingtimes <- data.frame()
+    transformeddata <- data.frame()
+    
     readingtimes <- data.frame()
     transformeddata <- data.frame()
     
