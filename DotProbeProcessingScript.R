@@ -3,10 +3,10 @@ library(dplyr)
 x <- readline("State desired Directory (no quotation marks, please!): ")
 
 
-getprobeRTs <- function(x, RTfile, readfile){
+getprobeRTs <- function(directory, RTfile, readfile){
     ## initialize empty data frames, grab list of files
     
-    files <- list.files(x)
+    files <- list.files(directory)
     readingtimes <- data.frame()
     transformeddata <- data.frame()
     
