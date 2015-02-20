@@ -12,9 +12,6 @@ getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
     readingtimes <- data.frame()
     transformeddata <- data.frame()
     
-    readingtimes <- data.frame()
-    transformeddata <- data.frame()
-    
     for (i in 1:length(files)) {
         
         path <- paste(x, files[i], sep = "/") # build file path
