@@ -70,8 +70,9 @@ getscores <- function(x, exclude = c("Log")) {
     
     ## Save output to working directory
     
-    names(df) <- c("ID", "score")
-    write.csv(df, "greenwaldscoresEEGIAT.csv")
+    names(df) <- c("id", "iat.score")
+    filename <- paste("greenwaldscoresIAT", Sys.Date(), ".csv", sep = "")
+    write.csv(df, filename)
 }
 
 getscores(x)
