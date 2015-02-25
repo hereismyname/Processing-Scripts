@@ -59,6 +59,11 @@ getscores <- function(x, exclude = c("Log")) {
         ## Block 7, while negative values indicate bias towards association in
         ## Block 4.
         
+        ## Block 3 = Black & HIV
+        ## Block 4 = Black & HIV
+        ## Block 6 = White & HIV
+        ## Block 7 = White & HIV
+        
         b6minusb3 <- (means2[3, 2] - means2[1, 2]) / sd3and6
         b7minusb4 <- (means2[4, 2] - means2[2, 2]) / sd4and7
         
