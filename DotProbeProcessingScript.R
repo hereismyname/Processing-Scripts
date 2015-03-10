@@ -3,7 +3,7 @@ library(dplyr)
 x <- readline("State desired Directory (no quotation marks, please!): ")
 
 
-getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
+getprobeRTs <- function(directory, RTfile, readfile, avgreadtimes, exclude = c("log")) {
     ## initialize empty data frames, grab list of files
     
     files <- list.files(directory)
@@ -12,9 +12,9 @@ getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
     readingtimes <- data.frame()
     transformeddata <- data.frame()
     
-    for (i in 1:length(files)) {
+    for (file in files) {
         
-        path <- paste(x, files[i], sep = "/") # build file path
+        path <- paste(x, file, sep = "/") # build file path
         
         data <- tbl_df(read.csv(path))
         subjectreading <- data %>%
@@ -157,5 +157,5 @@ getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
     
     write.csv(transformeddata, file = RTfile, row.names = FALSE)
     write.csv(readingtimes, file = readfile, row.names = FALSE)
-    write.csv(avgreadfile, file = avgread.times, row.names = FALSE)
+    write.csv(avgread.times, file = avgreadtimes, row.names = FALSE)
 }
