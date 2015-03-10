@@ -137,8 +137,25 @@ getprobeRTs <- function(directory, RTfile, readfile, exclude = c("log")) {
         }
     }
     
+    ids <- unique(readingtimes$subject)
+    
+    avgread.times <- data.frame()
+    
+    for (i in 1:length(ids)) {
+        dats <- dat %>%
+            filter(subject == ids[i])
+        
+        avg.read <- mean(dats$RTP1)
+        avg.read <- c(avg.read, mean(dats$RTP2))
+        avg.read <- mean(avg.read)
+        avg.read <- data.frame(id = ids[i], avg.read)
+        
+        avgread.times <- rbind(avgread.times, avg.read)
+    }
+    
     ## create the output files
     
     write.csv(transformeddata, file = RTfile, row.names = FALSE)
     write.csv(readingtimes, file = readfile, row.names = FALSE)
+    write.csv(avgreadfile, file = avgread.times, row.names = FALSE)
 }
