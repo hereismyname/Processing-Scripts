@@ -1,0 +1,39 @@
+library(dplyr)
+
+#directory <- readline("State desired Directory (no quotation marks, please!): ")
+directory <- "C:/Users/andwilmo/Box Sync/EEG/NBack/Data"
+
+scoreNback <- function(directory, outputfile, exclude = c("1.csv", "test.csv", "1.16.233.csv")) {
+    ## initialize empty data frames, grab list of files
+    
+    files <- list.files(directory)
+    files <- files[!(files %in% exclude)]
+    
+    output <- data.frame()
+    
+    for (file in files) {
+        
+        path <- paste(directory, file, sep = "/") # build file path
+
+        dat <- tbl_df(read.csv(path))
+        
+        out <- dat %>%
+            select(id = Subj, rt = RT, critical = criticl, correct = Correct) %>%
+            filter(critical == "critical") %>%
+            mutate(lnrt = log(rt)) %>%
+            summarize(id = unique(id),
+                      avgrt = mean(rt),
+                      sdrt = sd(rt),
+                      avglnrt = mean(lnrt),
+                      sdlnrt = sd(lnrt),
+                      corr = sum(correct == "True"), 
+                      incorr = sum(correct == "False")) %>%
+            mutate(critacc = corr / (corr + incorr))
+        
+        output <- rbind(output, out)
+    }
+    
+    write.csv(output, outputfile, row.names = FALSE)
+}
+
+scoreNback(directory, "nbackscores.csv")
